@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
   def index
-    @movies = %w(Interstellar Tenet Dune Inception)
+    @movies = Movie.all
   end
 end
