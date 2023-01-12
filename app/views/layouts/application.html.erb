@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flix</title>
+    <title>Fantastic Flix!</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- I learned about SimpleCSS during DHH's intro to Rails 7 video.
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    -->
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= image_tag "logo.png", alt: "Logo" %>
+    </header>
+    <div class="content"><%= yield %></div>
+    <footer>
+      <p>
+        Copyright &copy; <%= Time.now.year %>
+        <%= link_to "Michael Westphal", "https://github.com/michaelwestphal" %>
+      </p>
+    </footer>
   </body>
 </html>
