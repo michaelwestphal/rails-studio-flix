@@ -2,7 +2,7 @@
   <section class="movie">
     <div class="summary">
       <h2>
-        <%= movie.title %>
+        <%= link_to movie.title, movie %>
       </h2>
       <h3>
         <%= total_gross(movie) %>
@@ -10,9 +10,6 @@
       <p>
         <%= truncate(movie.description, length: 150, separator: ' ') %>
       </p>
-      <!--
-      <p><%= year_of(movie) %></p>
-      -->
     </div>
   </section>
 <% end %>
