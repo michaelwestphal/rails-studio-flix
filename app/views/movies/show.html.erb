@@ -1,4 +1,7 @@
 <section class="movie-details">
+  <div class="image">
+    <%= image_tag @movie.image_file_name, alt: "#{@movie.title} poster" %>
+  </div>
   <div class="details">
     <h1><%= @movie.title %></h1>
     <h2>
@@ -10,6 +13,14 @@
     </p>
     <table>
       <tr>
+        <tr>
+          <th>Director:</th>
+          <td><%= @movie.director %></td>
+        </tr>
+        <tr>
+          <th>Duration:</th>
+          <td><%= @movie.duration %></td>
+        </tr>
         <th>Total Gross:</th>
         <td><%= total_gross(@movie) %></td>
       </tr>

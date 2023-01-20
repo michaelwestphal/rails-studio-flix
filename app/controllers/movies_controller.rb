@@ -60,12 +60,13 @@ class MoviesController < ApplicationController
 
   private
 
-  def movie_params
-    # ALTERNATIVE:
-    # params.require(:movie).permit!
-    #  While convenient, using `permit!` is risky because all the attributes will always be updatable from form data.
-    #  Instead, it's better to explicitly list the attributes that can be updated from a form.
-    params.require(:movie).
-      permit(:title, :description, :rating, :released_on, :total_gross)
-  end
+    def movie_params
+      # ALTERNATIVE:
+      # params.require(:movie).permit!
+      #  While convenient, using `permit!` is risky because all the attributes will always be updatable from form data.
+      #  Instead, it's better to explicitly list the attributes that can be updated from a form.
+      params.require(:movie).
+        permit(:title, :description, :rating, :released_on, :total_gross,
+               :director, :duration, :image_file_name)
+    end
 end
