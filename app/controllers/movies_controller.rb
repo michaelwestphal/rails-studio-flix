@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
   #  And the ones in this controller are all of the standard ones defined when
   #  you add a 'resources' route.
   def index
-    @movies = Movie.all
+    @movies = Movie.released
   end
 
   def show
