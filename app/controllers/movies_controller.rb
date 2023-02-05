@@ -27,7 +27,9 @@ class MoviesController < ApplicationController
   def update
     @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
-      redirect_to @movie
+      # flash[:notice] = "Movie successfully updated!"
+      # OR inline with the redirect:
+      redirect_to @movie, notice: "Movie successfully updated!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +42,10 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to @movie
+      # Rails redirect_to supports :notice and :alert flash types by default
+      # https://api.rubyonrails.org/classes/ActionController/Redirecting.html#method-i-redirect_to
+      # Also: https://guides.rubyonrails.org/action_controller_overview.html#the-flash
+      redirect_to @movie, notice: "Movie successfully created!"
     else
       # We render the new template with the same data already POSTed
       # If we were to redirect to 'new', we'd lose the previously entered
@@ -64,7 +69,12 @@ class MoviesController < ApplicationController
     #
     # TO RECAPITULATE: Since we are using the /movies/:id route and updating the default GET to DELETE,
     #  we need to change it back to GET when we redirect to the same path
-    redirect_to movies_url, status: :see_other
+    redirect_to movies_url, status: :see_other, alert: "Movie successfully deleted!"
+    # TO SHOW CUSTOM FLASH TYPES:
+    # - Comment out the body of this method and uncomment the redirect below
+    # - See the add_flash_types(:danger) within ApplicationController
+    # redirect_to movies_url, status: :see_other,
+    #             danger: "I'm sorry, Dave, I'm afraid I can't do that!"
   end
 
   private
