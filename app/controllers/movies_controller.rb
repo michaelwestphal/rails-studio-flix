@@ -19,15 +19,18 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
   end
 
-  # TODO: How do we handle error scenarios?
+  # TODO: How do we handle these error scenarios?
   #  - Trying to edit a movie that does exist
   #  - Trying to delete a movie that doesn't exist (it was deleted by someone else and the data is stale)
   #  - Adding a duplicate movie
 
   def update
     @movie = Movie.find(params[:id])
-    @movie.update(movie_params)
-    redirect_to @movie
+    if @movie.update(movie_params)
+      redirect_to @movie
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def new
@@ -36,8 +39,14 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    @movie.save
-    redirect_to @movie
+    if @movie.save
+      redirect_to @movie
+    else
+      # We render the new template with the same data already POSTed
+      # If we were to redirect to 'new', we'd lose the previously entered
+      # data.
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # NOTE: 'destroy' is the internal Rails term, whereas 'delete' is the external term (e.g., HTTP METHOD, SQL, etc)

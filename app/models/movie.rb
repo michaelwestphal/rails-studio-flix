@@ -1,4 +1,20 @@
 class Movie < ApplicationRecord
+  RATINGS = %w(G PG PG-13 R NC-17)
+
+  # TODO: For TDD I could have written a test where I expect these
+  #  to be in place and assert the error message exists and then the
+  #  valid case.
+  validates :title, :released_on, :duration, presence: true
+  validates :description, length: { minimum: 25 }
+  validates :total_gross, numericality: { greater_than_or_equal_to: 0}
+  validates :image_file_name, format: {
+    with: /\w+\.(jpg|png)\z/i,
+    message: "must be a JPG or PNG image"
+  }
+  validates :rating, inclusion: RATINGS
+  #  OR
+  # validates :rating, inclusion: { in: RATINGS }
+
   # NOTE: Class level method
   def self.released
     # NOTE: The placeholder, '?', is needed to convert the Ruby type into a valid

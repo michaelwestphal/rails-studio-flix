@@ -1,0 +1,20 @@
+<%#= model.errors.full_messages.to_sentence %>
+<%# OR better... %>
+<% if object.errors.any? %>
+  <section class="errors">
+    <h2>
+      Oops! Your form could not be saved
+    </h2>
+    <h3>
+      Please correct the following
+      <%= pluralize object.errors.size, "error" %>:
+    </h3>
+    <ul>
+     <%# TODO: Consider mixing in a Stimulus controller or view helper to create
+          jump links down to the form fields %>
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
