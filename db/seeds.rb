@@ -183,7 +183,8 @@ Movie.create!([
       }.squish,
       released_on: "2021-10-22",
       rating: 'PG-13',
-      total_gross: 402_027_830
+      total_gross: 402_027_830,
+      duration: "155 min"
   },
     {
       title: '1917',
@@ -195,7 +196,8 @@ Movie.create!([
       }.squish,
       released_on: "2020-01-10",
       rating: 'R',
-      total_gross: 384_577_421
+      total_gross: 384_577_421,
+      duration: "119 min"
     },
     {
       title: 'Tenet',
@@ -207,7 +209,8 @@ Movie.create!([
       }.squish,
       released_on: "2020-09-03",
       rating: 'PG-13',
-      total_gross: 365_304_105
+      total_gross: 365_304_105,
+      duration: "150 min"
     },
     {
       title: 'Interstellar',
@@ -218,6 +221,7 @@ Movie.create!([
       }.squish,
       released_on: "2014-10-07",
       rating: 'PG-13',
-      total_gross: 773_867_216
+      total_gross: 773_867_216,
+      duration: "169 min"
     },
 ])

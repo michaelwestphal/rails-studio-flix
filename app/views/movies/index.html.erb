@@ -10,6 +10,10 @@
       <h3>
         <%= total_gross(movie) %>
       </h3>
+      <%# TODO: Extract custom style for this? %>
+      <p style="font-size: small">
+         <%= average_review(movie) %>
+      </p>
       <p>
         <%= truncate(movie.description, length: 150, separator: ' ') %>
       </p>
