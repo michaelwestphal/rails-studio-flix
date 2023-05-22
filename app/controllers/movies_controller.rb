@@ -3,6 +3,7 @@
 #  - rails routes -c MoviesController
 #  - Call 'fail' in a method to see the params, etc
 class MoviesController < ApplicationController
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   # NOTE: These controller methods are referred to as Actions in Rail parlance.
   #  And the ones in this controller are all of the standard ones defined when
@@ -12,11 +13,9 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.find(params[:id])
   end
 
   def edit
-    @movie = Movie.find(params[:id])
   end
 
   # TODO: How do we handle these error scenarios?
@@ -25,7 +24,6 @@ class MoviesController < ApplicationController
   #  - Adding a duplicate movie
 
   def update
-    @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
       # flash[:notice] = "Movie successfully updated!"
       # OR inline with the redirect:
@@ -58,7 +56,6 @@ class MoviesController < ApplicationController
   def destroy
     # NOTE: There's no reason to set this to an instance variable since the destroy action never shows it
     #  but for consistency with the other actions...
-    @movie = Movie.find(params[:id])
     @movie.destroy
     # QUESTION: Why do we need to (re)set the status for a DELETE, but not for a POST, PUT, PATCH above?
     #
@@ -79,13 +76,17 @@ class MoviesController < ApplicationController
 
   private
 
-    def movie_params
-      # ALTERNATIVE:
-      # params.require(:movie).permit!
-      #  While convenient, using `permit!` is risky because all the attributes will always be updatable from form data.
-      #  Instead, it's better to explicitly list the attributes that can be updated from a form.
-      params.require(:movie).
-        permit(:title, :description, :rating, :released_on, :total_gross,
-               :director, :duration, :image_file_name)
-    end
+  def set_movie
+    @movie = Movie.find(params[:id])
+  end
+
+  def movie_params
+    # ALTERNATIVE:
+    # params.require(:movie).permit!
+    #  While convenient, using `permit!` is risky because all the attributes will always be updatable from form data.
+    #  Instead, it's better to explicitly list the attributes that can be updated from a form.
+    params.require(:movie).
+      permit(:title, :description, :rating, :released_on, :total_gross,
+             :director, :duration, :image_file_name)
+  end
 end
