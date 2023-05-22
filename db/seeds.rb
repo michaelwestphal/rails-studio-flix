@@ -184,6 +184,7 @@ Movie.create!([
       released_on: "2021-10-22",
       rating: 'PG-13',
       total_gross: 402_027_830,
+      director: 'Denis Villeneuve',
       duration: "155 min"
   },
     {
