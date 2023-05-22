@@ -11,23 +11,24 @@
       <%= link_to pluralize(@movie.reviews.size, "review"), movie_reviews_path(@movie) %>
     </div>
     <p>
-      <%# Is there a helper to format a text field so that we can keep new lines and the like? %>
+      <%# TODO: Is there a helper to format a text field so that we can keep new lines and the like? %>
       <%= @movie.description %>
     </p>
     <table>
       <tr>
-        <tr>
-          <th>Director:</th>
-          <td><%= @movie.director %></td>
-        </tr>
-        <tr>
-          <th>Duration:</th>
-          <td><%= @movie.duration %></td>
-        </tr>
+        <th>Director:</th>
+        <td><%= @movie.director %></td>
+      </tr>
+      <tr>
+        <th>Duration:</th>
+        <td><%= @movie.duration %></td>
+      </tr>
+      <tr>
         <th>Total Gross:</th>
         <td><%= total_gross(@movie) %></td>
       </tr>
     </table>
+    <%= link_to "Write Review", new_movie_review_path(@movie), class: "review" %>
   </div>
 </section>
 
