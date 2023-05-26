@@ -185,7 +185,8 @@ Movie.create!([
       rating: 'PG-13',
       total_gross: 402_027_830,
       director: 'Denis Villeneuve',
-      duration: "155 min"
+      duration: "155 min",
+      image_file_name: "dune.jpg"
   },
     {
       title: '1917',
