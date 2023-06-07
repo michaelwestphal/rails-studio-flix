@@ -8,6 +8,7 @@
       <%= year_of(@movie) %> &bull; <%= @movie.rating %>
     </h2>
     <div class="reviews">
+      <%= average_stars(@movie) %>
       <%# Captains Log: I'm getting a different number of reviews here versus what I'm seeing on the reviews page!
            REALLY ODD!! In the Rails console I can see movie.reviews.size is 2, but then 3 when printed here
            in the UI. What is going on? Is there a "new one" initialized?

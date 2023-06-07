@@ -12,14 +12,11 @@ module MoviesHelper
     # movie.released_on.strftime('%Y')
   end
 
-  def average_review(movie)
-    reviews = movie.reviews
-    if reviews.empty?
-      "No reviews"
+  def average_stars(movie)
+    if movie.average_stars.zero?      
+      content_tag(:strong, "No reviews") 
     else
-      aggregate_stars = reviews.map{ |review| review.stars }.reduce(:+)
-      average_stars = aggregate_stars / (reviews.size * 1.0)
-      "#{pluralize(average_stars.round(2), "star")} (#{pluralize(reviews.size, "review")})"
+      pluralize(number_with_precision(movie.average_stars, precision: 1), "star")
     end
   end
 end
