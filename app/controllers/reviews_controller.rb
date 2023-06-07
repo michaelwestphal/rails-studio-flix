@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   # Can append "only: [:action_method_name]" or "except: [:action_method_name]"
   before_action :set_movie
+  before_action :set_review, only: [:edit, :update, :destroy]
 
   def index
     @reviews = @movie.reviews
@@ -16,16 +17,36 @@ class ReviewsController < ApplicationController
     # @review = @movie.reviews.new({ name: params[:review][:name], stars: params[:review][:stars], comment: params[:review][:comment] })
 
     if @review.save
-      redirect_to movie_review_path(@movie), notice: "Thanks for your review!"
+      redirect_to movie_reviews_url, notice: "Thanks for your review!"
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+  end
+
+  def update
+    if @review.update(review_params)
+      redirect_to movie_reviews_url, notice: "Review successfully updated!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @review.destroy
+    redirect_to movie_reviews_url, status: :see_other, alert: "Review successfully deleted!"
   end
 
   private
 
   def set_movie
     @movie = Movie.find(params[:movie_id])
+  end
+
+  def set_review
+    @review = @movie.reviews.find(params[:id])
   end
 
   def review_params

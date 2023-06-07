@@ -8,6 +8,15 @@
       <%= year_of(@movie) %> &bull; <%= @movie.rating %>
     </h2>
     <div class="reviews">
+      <%# Captains Log: I'm getting a different number of reviews here versus what I'm seeing on the reviews page!
+           REALLY ODD!! In the Rails console I can see movie.reviews.size is 2, but then 3 when printed here
+           in the UI. What is going on? Is there a "new one" initialized?
+
+          Captains Log, Supplemental: YESSSSSS!!!! The logic to create a new "shell" of a review for the "add review
+          form" within the controller was affecting the size of the reviews on the movie object. IF I re-enable this
+          "add review", I think I should create a helper (perhaps one exists already in Rails), to disregard un-saved
+          reviews for this display logic below. This was fun to figure out!!
+      %>
       <%= link_to pluralize(@movie.reviews.size, "review"), movie_reviews_path(@movie) %>
     </div>
     <p>
@@ -36,3 +45,8 @@
   <%= link_to "Edit", edit_movie_path(@movie), class: "button" %>
   <%= link_to "Delete", @movie, class: "button", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 </section>
+
+<!-- TODO: Create styles for this and then enable-->
+<!--<section class="review">-->
+  <%#= render "reviews/form" %>
+<!--</section>-->

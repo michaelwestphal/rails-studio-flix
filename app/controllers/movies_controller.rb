@@ -13,6 +13,8 @@ class MoviesController < ApplicationController
   end
 
   def show
+    # RE-ENABLE once the nested review form is back on the show movie page
+    # @review = @movie.reviews.new
   end
 
   def edit
