@@ -40,10 +40,23 @@ class Movie < ApplicationRecord
   end
 
   def flop?
-    total_gross.blank? || total_gross < 225_000_000
+    # My horribly non-Rubyesc solution:
+    # (total_gross.blank? || total_gross < 225_000_000) && !(reviews.count >= 50 && reviews.average(:stars) >= 4)
+
+    unless (reviews.count > 50 && average_stars >= 4)
+      (total_gross.blank? || total_gross < 225_000_000)
+    end
+    # TODO: When should I favor wrapping statements in parentheses in Ruby and not?
+    #  Perhaps look up some DHH Rails code for inspiration?
   end
 
   def average_stars
+    # Originally I performed the average manually like this before I learned about the ActiveRecord::Calculations
+    # module:
+    #
+    # aggregate_stars = reviews.map{ |review| review.stars }.reduce(:+)
+    # aggregate_stars / (reviews.size * 1.0)
+
     reviews.average(:stars) || 0.0
   end
 
