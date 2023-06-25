@@ -3,7 +3,7 @@
 #  - rails routes -c MoviesController
 #  - Call 'fail' in a method to see the params, etc
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie, only: %i[show edit update destroy]
 
   # NOTE: These controller methods are referred to as Actions in Rail parlance.
   #  And the ones in this controller are all of the standard ones defined when
@@ -17,8 +17,7 @@ class MoviesController < ApplicationController
     # @review = @movie.reviews.new
   end
 
-  def edit
-  end
+  def edit; end
 
   # TODO: How do we handle these error scenarios?
   #  - Trying to edit a movie that does exist
@@ -29,7 +28,7 @@ class MoviesController < ApplicationController
     if @movie.update(movie_params)
       # flash[:notice] = "Movie successfully updated!"
       # OR inline with the redirect:
-      redirect_to @movie, notice: "Movie successfully updated!"
+      redirect_to @movie, notice: 'Movie successfully updated!'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,7 +44,7 @@ class MoviesController < ApplicationController
       # Rails redirect_to supports :notice and :alert flash types by default
       # https://api.rubyonrails.org/classes/ActionController/Redirecting.html#method-i-redirect_to
       # Also: https://guides.rubyonrails.org/action_controller_overview.html#the-flash
-      redirect_to @movie, notice: "Movie successfully created!"
+      redirect_to @movie, notice: 'Movie successfully created!'
     else
       # We render the new template with the same data already POSTed
       # If we were to redirect to 'new', we'd lose the previously entered
@@ -68,7 +67,7 @@ class MoviesController < ApplicationController
     #
     # TO RECAPITULATE: Since we are using the /movies/:id route and updating the default GET to DELETE,
     #  we need to change it back to GET when we redirect to the same path
-    redirect_to movies_url, status: :see_other, alert: "Movie successfully deleted!"
+    redirect_to movies_url, status: :see_other, alert: 'Movie successfully deleted!'
     # TO SHOW CUSTOM FLASH TYPES:
     # - Comment out the body of this method and uncomment the redirect below
     # - See the add_flash_types(:danger) within ApplicationController
@@ -87,8 +86,8 @@ class MoviesController < ApplicationController
     # params.require(:movie).permit!
     #  While convenient, using `permit!` is risky because all the attributes will always be updatable from form data.
     #  Instead, it's better to explicitly list the attributes that can be updated from a form.
-    params.require(:movie).
-      permit(:title, :description, :rating, :released_on, :total_gross,
-             :director, :duration, :image_file_name)
+    params.require(:movie)
+          .permit(:title, :description, :rating, :released_on, :total_gross,
+                  :director, :duration, :image_file_name)
   end
 end
