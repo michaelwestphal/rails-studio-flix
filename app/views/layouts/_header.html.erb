@@ -1,10 +1,15 @@
 <header>
   <nav>
     <%= link_to image_tag("logo.png", alt: "Logo"), root_path %>
-    <ul>
+    <ul class="left">
       <li>
-        <!-- NOTE: root_path and movies_path point to the same location at the moment. -->
+        <%# NOTE: root_path and movies_path point to the same location at the moment.  %>
         <%= link_to "All Movies", movies_path %>
+      </li>
+    </ul>
+    <ul class="right">
+      <li>
+        <%= link_to "Sign Up", signup_path, class: "button" %>
       </li>
     </ul>
   </nav>
