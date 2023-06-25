@@ -1,5 +1,5 @@
 class Movie < ApplicationRecord
-  RATINGS = %w(G PG PG-13 R NC-17)
+  RATINGS = %w[G PG PG-13 R NC-17]
 
   has_many :reviews, dependent: :destroy
 
@@ -8,10 +8,10 @@ class Movie < ApplicationRecord
   #  valid case.
   validates :title, :released_on, :duration, presence: true
   validates :description, length: { minimum: 25 }
-  validates :total_gross, numericality: { greater_than_or_equal_to: 0}
+  validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
   validates :image_file_name, format: {
     with: /\w+\.(jpg|png)\z/i,
-    message: "must be a JPG or PNG image"
+    message: 'must be a JPG or PNG image'
   }
   validates :rating, inclusion: RATINGS
   #  OR
@@ -24,7 +24,7 @@ class Movie < ApplicationRecord
     #  use String interpolation. (There's also a question of properly sanitized inputs
     #  if we use interpolation. I'm guessing we're responsible for this if we chose that
     #  means.)
-    where("released_on < ?", Time.now).order(released_on: :desc)
+    where('released_on < ?', Time.now).order(released_on: :desc)
     # OR
     # where("released_on < ?", Time.now).order("released_on desc")
 
@@ -43,11 +43,10 @@ class Movie < ApplicationRecord
     # My horribly non-Rubyesc solution:
     # (total_gross.blank? || total_gross < 225_000_000) && !(reviews.count >= 50 && reviews.average(:stars) >= 4)
 
-    unless (reviews.count > 50 && average_stars >= 4)
-      (total_gross.blank? || total_gross < 225_000_000)
-    end
-    # TODO: When should I favor wrapping statements in parentheses in Ruby and not?
-    #  Perhaps look up some DHH Rails code for inspiration?
+    # Original used an 'unless' statement here
+    return if reviews.count > 50 && average_stars >= 4
+
+    (total_gross.blank? || total_gross < 225_000_000)
   end
 
   def average_stars
@@ -62,5 +61,5 @@ class Movie < ApplicationRecord
 
   def average_stars_as_percent
     (average_stars / 5.0) * 100
-  end 
+  end
 end
