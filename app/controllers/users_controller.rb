@@ -19,6 +19,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @user.update(user_params)
+      redirect_to @user, notice: 'Account successfully updated!'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to movies_url, status: :see_other, alert: 'Account successfully deleted!'
+  end
+
   private
 
   def set_user
