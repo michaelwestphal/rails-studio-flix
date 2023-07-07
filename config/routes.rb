@@ -6,8 +6,13 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  resources :users
+  # Making it a singular session since there will only ever be one
+  # https://api.rubyonrails.org/classes/ActionDispatch/Routing/Mapper/Resources.html#method-i-resource
+  # https://guides.rubyonrails.org/routing.html#singular-resources
+  # resources :sessions, only: %i[new create destroy]
+  resource :session, only: %i[new create destroy]
 
+  resources :users
   # Which way?
   # get 'signup', to: 'users#new'
   get 'signup' => 'users#new'
