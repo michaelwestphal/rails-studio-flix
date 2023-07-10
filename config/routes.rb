@@ -11,9 +11,8 @@ Rails.application.routes.draw do
   # https://guides.rubyonrails.org/routing.html#singular-resources
   # resources :sessions, only: %i[new create destroy]
   resource :session, only: %i[new create destroy]
+  get 'signin', to: 'sessions#new'
 
   resources :users
-  # Which way?
-  # get 'signup', to: 'users#new'
-  get 'signup' => 'users#new'
+  get 'signup', to: 'users#new'
 end
