@@ -10,15 +10,20 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # FIXME: How do we protect against exposing "username/email has already been taken" type
+  #  of errors providing a system scanning us too much information?
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to @user, notice: 'Thanks for signing up!'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  # FIXME: If a user in in Account Settings and they logout (via deleting their session cookie)
+  #  how can we protect this route and others like it?
   def edit; end
 
   def update
