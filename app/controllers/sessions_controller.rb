@@ -48,5 +48,9 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    session[:user_id] = nil
+    # see_other status to make sure the redirect is a GET request and not remain a DELETE
+    redirect_to movies_url, status: :see_other, notice: "You're now signed out!"
+  end
 end
