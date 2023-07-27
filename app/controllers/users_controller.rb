@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
-  before_action :require_signin, except: %i[new create]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_signin, except: [:new, :create]
+  before_action :require_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
   end
 
-  def show; end
+  def show
+  end
 
   def new
     @user = User.new
@@ -24,9 +26,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # FIXME: If a user in in Account Settings and they logout (via deleting their session cookie)
-  #  how can we protect this route and others like it?
-  def edit; end
+  def edit
+  end
 
   def update
     if @user.update(user_params)
@@ -46,6 +47,10 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def require_correct_user
+    redirect_to root_url, status: :see_other unless current_user?(@user)
   end
 
   def user_params

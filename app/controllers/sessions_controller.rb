@@ -37,7 +37,8 @@ class SessionsController < ApplicationController
       # TODO: How would you store "session" data that persists beyond a closed brower
       #  window?
       session[:user_id] = user.id
-      redirect_to user, notice: "Welcome back, #{user.name}!"
+      redirect_to session[:intended_url] || user, notice: "Welcome back, #{user.name}!"
+      session[:intended_url] = nil
     else
       # We need .now so it shows with this request, otherwise it won't be
       # available until the next request. (I believe this is because of the
