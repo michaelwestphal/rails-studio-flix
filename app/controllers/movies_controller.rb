@@ -4,6 +4,8 @@
 #  - Call 'fail' in a method to see the params, etc
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show edit update destroy]
+  before_action :require_signin, except: [:index, :show]
+  before_action :require_admin, except: [:index, :show]
 
   # NOTE: These controller methods are referred to as Actions in Rail parlance.
   #  And the ones in this controller are all of the standard ones defined when
