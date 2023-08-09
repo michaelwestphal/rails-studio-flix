@@ -1,9 +1,6 @@
 <%= form_with(model: [@movie, @review]) do |form| %>
   <%= render "shared/errors", object: @review %>
 
-  <%= form.label :name %>
-  <%= form.text_field :name, autofocus: true  %>
-
   <%= form.label :stars %>
   <%#= form.select :stars, Review::STARS, prompt: "Pick one" %>
   <%# collection_radio_buttons helper for more complicated objects
@@ -12,7 +9,7 @@
   %>
   <% Review::STARS.each do |star| %>
     <span class="star">
-      <%= form.radio_button :stars, star %>
+      <%= form.radio_button :stars, star, autofocus: true %>
       <%= label_tag star %>
     </span>
   <% end %>
