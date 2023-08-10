@@ -2,6 +2,7 @@ class Movie < ApplicationRecord
   RATINGS = %w[G PG PG-13 R NC-17]
 
   has_many :reviews, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   # TODO: For TDD I could have written a test where I expect these
   #  to be in place and assert the error message exists and then the
