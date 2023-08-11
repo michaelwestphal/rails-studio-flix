@@ -18,6 +18,11 @@ class MoviesController < ApplicationController
     # RE-ENABLE once the nested review form is back on the show movie page
     # @review = @movie.reviews.new
     @fans = @movie.fans
+
+    @favorite = current_user.favorites.find_by(movie_id: @movie.id) if current_user
+    # OR:
+    # @favorite = @movie.fans.find_by(id: current_user.id)
+    # NOTE: Using .find throws an ActiveRecord::RecordNotFound exception if missing
   end
 
   def edit; end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :movies do
     resources :reviews
+    resources :favorites, only: [:create, :destroy]
   end
 
   # Making it a singular session since there will only ever be one
@@ -15,6 +16,4 @@ Rails.application.routes.draw do
 
   resources :users
   get 'signup', to: 'users#new'
-
-  resources :favorites
 end
