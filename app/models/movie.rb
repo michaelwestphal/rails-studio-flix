@@ -2,6 +2,9 @@ class Movie < ApplicationRecord
   RATINGS = %w[G PG PG-13 R NC-17]
 
   has_many :reviews, dependent: :destroy
+  # TODO: If we truly use this, then I'd look into creating an index too.
+  has_many :critics, through: :reviews, source: :user
+
   has_many :favorites, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
 
