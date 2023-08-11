@@ -3,6 +3,7 @@ class Movie < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :fans, through: :favorites, source: :user
 
   # TODO: For TDD I could have written a test where I expect these
   #  to be in place and assert the error message exists and then the
