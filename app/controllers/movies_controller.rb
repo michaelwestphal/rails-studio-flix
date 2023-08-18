@@ -18,6 +18,7 @@ class MoviesController < ApplicationController
     # RE-ENABLE once the nested review form is back on the show movie page
     # @review = @movie.reviews.new
     @fans = @movie.fans
+    @genres = @movie.genres.order(:name)
 
     @favorite = current_user.favorites.find_by(movie_id: @movie.id) if current_user
     # OR:
@@ -96,6 +97,6 @@ class MoviesController < ApplicationController
     #  Instead, it's better to explicitly list the attributes that can be updated from a form.
     params.require(:movie)
           .permit(:title, :description, :rating, :released_on, :total_gross,
-                  :director, :duration, :image_file_name)
+                  :director, :duration, :image_file_name, genre_ids: [])
   end
 end
