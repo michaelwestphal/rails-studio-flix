@@ -7,7 +7,7 @@
 <%= form_with(url: session_path) do |f| %>
 
   <%= f.label :email_or_username %>
-  <%= f.text_field :email_or_username, required: true, autofocus: true %>
+  <%= f.text_field :email_or_username, required: true, autofocus: true, autocomplete: "off" %>
 
   <%= f.label :password %>
   <%= f.password_field :password, required: true %>
