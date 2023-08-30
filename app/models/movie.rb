@@ -2,6 +2,17 @@ class Movie < ApplicationRecord
   RATINGS = %w[G PG PG-13 R NC-17]
 
   has_many :reviews, dependent: :destroy
+  # Another Use for Lambdas
+  #
+  # Now that you have a handle on Ruby lambdas, you might be interested to learn that you can
+  # pass a Ruby lambda as the second parameter to the has_many method to customize the query.
+  #
+  # For example, suppose you wanted to change the ordering of movie reviews so that the
+  # most-recent review appeared first in the listing on http://localhost:3000/movies/1/reviews.
+  # To do that, change the has_many :reviews declaration in the Movie model like so:
+  #
+  # has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
+
   # TODO: If we truly use this, then I'd look into creating an index too.
   has_many :critics, through: :reviews, source: :user
 
@@ -29,6 +40,14 @@ class Movie < ApplicationRecord
   scope :recent, ->(max = 5) { released.limit(max) }
   # OR explicitly denote this as a lambda:
   # scope :recent, lambda { |max = 5|  released.limit(max) }
+  #
+  scope :hits, -> { released.where('total_gross >= 300000000').order(total_gross: :desc) }
+  #
+  # Note that the flop? method below has extra logic. Would I do this in "real life", I hope not, but I'll leave it for now.
+  # TODO: Revisit the lessons where 'hits' and 'flops' were added. (I must have skipped bonus activities)
+  scope :flops, -> { released.where('total_gross < 225000000').order(total_gross: :asc) }
+  scope :grossed_less_than, ->(amount) { released.where("total_gross < ?", amount) }
+  scope :grossed_greater_than, ->(amount) { released.where("total_gross > ?", amount) }
 
   # NOTE: Class level method
   # def self.released

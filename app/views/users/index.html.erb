@@ -2,8 +2,9 @@
 <ul class="users">
   <% @users.each do |user| %>
 	<li>
-	  <%= link_to user.name, user %> 
-	  created 
+	  <%= link_to user.name, user %>
+		<% if user.admin %>(admin 🧰)<% end %>
+	  created
 	  <%= time_ago_in_words user.created_at %>
 	  ago
 	</li>
