@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'movies#index'
 
+  get 'movies/filter/:filter' => 'movies#index', as: :filtered_movies
+  # Another form:
+  # (I'm not sure which I prefer, but I tend towards the "hash rocket" one)
+  # get 'movies/filter/:filter', to: 'movies#index', as: :filtered_movies
+
   resources :movies do
     resources :reviews
     resources :favorites, only: [:create, :destroy]

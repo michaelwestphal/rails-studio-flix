@@ -37,6 +37,7 @@ class Movie < ApplicationRecord
   # validates :rating, inclusion: { in: RATINGS }
 
   scope :released, -> { where('released_on < ?', Time.now).order(released_on: :desc) }
+  scope :upcoming, -> { where('released_on > ?', Time.now).order(released_on: :asc) }
   scope :recent, ->(max = 5) { released.limit(max) }
   # OR explicitly denote this as a lambda:
   # scope :recent, lambda { |max = 5|  released.limit(max) }
@@ -70,6 +71,10 @@ class Movie < ApplicationRecord
   #   # Movie.where(total_gross: 250_000_000..)
   #   # Movie.where(total_gross: ..900_000_000)
   # end
+
+  def unreleased?
+    released_on > Time.now
+  end
 
   def flop?
     # My horribly non-Rubyesc solution:

@@ -226,7 +226,22 @@ Movie.create!([
       total_gross: 773_867_216,
       duration: "169 min"
     },
+  {
+    title: 'Dune: Part Two',
+    description:
+      %{
+      Paul Atreides unites with Chani and the Fremen while seeking revenge against the
+      conspirators who destroyed his family.
+    }.squish,
+    released_on: "2024-03-15",
+    rating: 'PG-13',
+    director: 'Denis Villeneuve',
+    image_file_name: "dune2.jpg",
+    total_gross: 0,
+    duration: "120 min"
+  },
 ])
+# TODO: What about unreleased movies which are missing details like total_gross and duration?
 
 Genre.create!([
   { name: "Action" },
