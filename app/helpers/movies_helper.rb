@@ -22,4 +22,12 @@ module MoviesHelper
       link_to(name, url)
     end
   end
+
+  def main_image_tag(movie)
+    if movie.main_image.attached?
+      image_tag movie.main_image, alt: "#{movie.title} poster"
+    else
+      image_tag 'placeholder.png', alt: "#{movie.title} poster placeholder"
+    end
+  end
 end

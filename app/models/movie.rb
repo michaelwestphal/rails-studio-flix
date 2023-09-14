@@ -3,6 +3,8 @@ class Movie < ApplicationRecord
 
   before_save :set_slug
 
+  has_one_attached :main_image
+
   has_many :reviews, dependent: :destroy
   # Another Use for Lambdas
   #
@@ -31,10 +33,6 @@ class Movie < ApplicationRecord
   validates :released_on, :duration, presence: true
   validates :description, length: { minimum: 25 }
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
-  validates :image_file_name, format: {
-    with: /\w+\.(jpg|png)\z/i,
-    message: 'must be a JPG or PNG image'
-  }
   validates :rating, inclusion: RATINGS
   #  OR
   # validates :rating, inclusion: { in: RATINGS }

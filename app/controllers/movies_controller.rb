@@ -97,7 +97,7 @@ class MoviesController < ApplicationController
     #  Instead, it's better to explicitly list the attributes that can be updated from a form.
     params.require(:movie)
           .permit(:title, :description, :rating, :released_on, :total_gross,
-                  :director, :duration, :image_file_name, genre_ids: [])
+                  :director, :duration, :main_image, genre_ids: [])
   end
 
   def movies_filter
