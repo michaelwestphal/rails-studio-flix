@@ -20,72 +20,74 @@ Movie.create!([
     total_gross: 1_223_641_414,
     director: 'Anthony Russo',
     duration: '181 min',
-    # image_file_name: 'avengers-end-game.png'
   },
   {
     title: 'Captain Marvel',
     description:
     %{
-      Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.
+      Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught
+      in the middle of a galactic war between two alien races.
     }.squish,
     released_on: "2019-03-08",
     rating: 'PG-13',
     total_gross: 1_110_662_849,
     director: 'Anna Boden',
     duration: '124 min',
-    # image_file_name: 'captain-marvel.png'
   },
   {
     title: 'Black Panther',
     description:
     %{
-      T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.
+      T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward
+      to lead his people into a new future and must confront a challenger from his country's past.
     }.squish,
     released_on: "2018-02-16",
     rating: 'PG-13',
     total_gross: 1_346_913_161,
     director: 'Ryan Coogler',
     duration: '134 min',
-    # image_file_name: 'black-panther.png'
   },
   {
     title: 'Avengers: Infinity War',
     description:
     %{
-      The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.
+      The Avengers and their allies must be willing to sacrifice all in an attempt
+      to defeat the powerful Thanos before his blitz of devastation and ruin puts
+      an end to the universe.
     }.squish,
     released_on: "2018-04-27",
     rating: 'PG-13',
     total_gross: 2_048_359_754,
     director: 'Anthony Russo',
     duration: '149 min',
-    # image_file_name: 'avengers-infinity-war.png'
   },
   {
     title: 'Green Lantern',
     description:
     %{
-      Reckless test pilot Hal Jordan is granted an alien ring that bestows him with otherworldly powers that inducts him into an intergalactic police force, the Green Lantern Corps.
+      Reckless test pilot Hal Jordan is granted an alien ring that bestows him with
+      otherworldly powers that inducts him into an intergalactic police force, the
+      Green Lantern Corps.
     }.squish,
     released_on: "2011-06-17",
     rating: 'PG-13',
     total_gross: 219_851_172,
     director: 'Martin Campbell',
     duration: '114 min',
-    # image_file_name: 'green-lantern.png'
   },
   {
     title: 'Fantastic Four',
     description:
     %{
-      Four young outsiders teleport to an alternate and dangerous universe which alters their physical form in shocking ways. The four must learn to harness their new abilities and work together to save Earth from a former friend turned enemy.
+      Four young outsiders teleport to an alternate and dangerous universe which
+      alters their physical form in shocking ways. The four must learn to harness
+      their new abilities and work together to save Earth from a former friend turned enemy.
     }.squish,
     released_on: "2015-08-07",
     rating: 'PG-13',
     total_gross: 168_257_860,
     director: 'Josh Trank',
     duration: '100 min',
-    # image_file_name: 'fantastic-four.png'
   },
   {
     title: 'Iron Man',
@@ -100,7 +102,6 @@ Movie.create!([
     total_gross: 585_366_247,
     director: 'Jon Favreau',
     duration: '126 min',
-    # image_file_name: 'ironman.png'
   },
   {
     title: 'Superman',
@@ -115,7 +116,6 @@ Movie.create!([
     total_gross: 300_451_603,
     director: 'Richard Donner',
     duration: '143 min',
-    # image_file_name: 'superman.png'
   },
   {
     title: 'Spider-Man',
@@ -131,7 +131,6 @@ Movie.create!([
     total_gross: 825_025_036,
     director: 'Sam Raimi',
     duration: '121 min',
-    # image_file_name: 'spiderman.png'
   },
   {
     title: 'Batman',
@@ -145,7 +144,6 @@ Movie.create!([
     total_gross: 411_348_924,
     director: 'Tim Burton',
     duration: '126 min',
-    # image_file_name: 'batman.png'
   },
   {
     title: "Catwoman",
@@ -158,7 +156,6 @@ Movie.create!([
     total_gross: 82_102_379,
     director: "Jean-Christophe 'Pitof' Comar",
     duration: "101 min",
-    # image_file_name: "catwoman.png"
   },
   {
     title: "Wonder Woman",
@@ -171,7 +168,6 @@ Movie.create!([
     total_gross: 821_847_012,
     director: "Patty Jenkins",
     duration: "141 min",
-    # image_file_name: "wonder-woman.png"
   },
   # My movies
   {
@@ -186,7 +182,6 @@ Movie.create!([
       total_gross: 402_027_830,
       director: 'Denis Villeneuve',
       duration: "155 min",
-      # image_file_name: "dune.jpg"
   },
     {
       title: '1917',
@@ -236,11 +231,24 @@ Movie.create!([
     released_on: "2024-03-15",
     rating: 'PG-13',
     director: 'Denis Villeneuve',
-    # image_file_name: "dune2.jpg",
     total_gross: 0,
     duration: "120 min"
   },
+  {
+    title: 'The Batman',
+    description:
+      %{
+      When a sadistic serial killer begins murdering key political figures in Gotham,
+      Batman is forced to investigate the city's hidden corruption and question his family's involvement.
+    }.squish,
+    released_on: "2022-03-04",
+    rating: 'PG-13',
+    director: 'Matt Reeves',
+    total_gross: 369_345_583,
+    duration: "176 min"
+  },
 ])
+# TODO: Add Star Wars movies
 # TODO: What about unreleased movies which are missing details like total_gross and duration?
 
 Genre.create!([
@@ -255,3 +263,31 @@ Genre.create!([
   { name: "Animation" },
   { name: "Sci-Fi" }
 ])
+
+# TODO: Do I need to delete all images for these first and then "re-seed" the images?
+#  or check if one is already attached?
+[
+  ['Avengers: Endgame', 'avengers-end-game.png'],
+  ['Captain Marvel', 'captain-marvel.png'],
+  ['Black Panther', 'black-panther.png'],
+  ['Avengers: Infinity War', 'avengers-infinity-war.png'],
+  ['Green Lantern', 'green-lantern.png'],
+  ['Fantastic Four', 'fantastic-four.png'],
+  ['Iron Man', 'ironman.png'],
+  ['Superman', 'superman.png'],
+  ['Spider-Man', 'spiderman.png'],
+  ['Batman', 'batman.png'],
+  ['Catwoman', 'catwoman.png'],
+  ['Wonder Woman', 'wonder-woman.png'],
+  # My movies
+  ['Dune', 'dune.jpg'],
+  ['1917', '1917.jpg'],
+  ['Tenet', 'tenet.jpg'],
+  ['Interstellar', 'interstellar.jpg'],
+  ['Dune: Part Two', 'dune2.jpg' ],
+  ['The Batman', 'the_batman.jpg' ]
+].each do |movie_name, image_filename|
+  m = Movie.find_by(title: movie_name)
+  f = File.open(Rails.root.join("app/assets/images/#{image_filename}"))
+  m.main_image.attach(io: f, filename: image_filename)
+end

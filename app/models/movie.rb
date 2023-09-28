@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Movie < ApplicationRecord
-  RATINGS = %w[G PG PG-13 R NC-17]
+  RATINGS = %w[G PG PG-13 R NC-17].freeze
 
   before_save :set_slug
 
@@ -37,6 +39,8 @@ class Movie < ApplicationRecord
   #  OR
   # validates :rating, inclusion: { in: RATINGS }
 
+  validate :acceptable_image
+
   scope :released, -> { where('released_on < ?', Time.now).order(released_on: :desc) }
   scope :upcoming, -> { where('released_on > ?', Time.now).order(released_on: :asc) }
   scope :recent, ->(max = 5) { released.limit(max) }
@@ -48,8 +52,8 @@ class Movie < ApplicationRecord
   # Note that the flop? method below has extra logic. Would I do this in "real life", I hope not, but I'll leave it for now.
   # TODO: Revisit the lessons where 'hits' and 'flops' were added. (I must have skipped bonus activities)
   scope :flops, -> { released.where('total_gross < 225000000').order(total_gross: :asc) }
-  scope :grossed_less_than, ->(amount) { released.where("total_gross < ?", amount) }
-  scope :grossed_greater_than, ->(amount) { released.where("total_gross > ?", amount) }
+  scope :grossed_less_than, ->(amount) { released.where('total_gross < ?', amount) }
+  scope :grossed_greater_than, ->(amount) { released.where('total_gross > ?', amount) }
 
   # NOTE: Class level method
   # def self.released
@@ -106,6 +110,19 @@ class Movie < ApplicationRecord
   end
 
   private
+
+  def acceptable_image
+    return unless main_image.attached?
+
+    if main_image.blob.byte_size > 2.megabyte
+      errors.add(:main_image, 'is too big')
+    end
+
+    acceptable_types = %w[image/jpeg image/png]
+    unless acceptable_types.include?(main_image.content_type)
+      errors.add(:main_image, 'must be a JPEG or PNG')
+    end
+  end
 
   def set_slug
     # When assigning to a model attribute need self<dot>, but not when reading.
